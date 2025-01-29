@@ -43,8 +43,8 @@ app.post("/recibir-factura", async (req, res) => {
             "Content-Type": "application/json",
           },
           auth: {
-            username: process.env.FACTURAMA_USER,
-            password: process.env.FACTURAMA_PASSWORD,
+            username: "jpineda",
+            password: "Aurora2022",
           },
         }
       );
