@@ -70,6 +70,50 @@ app.post("/recibir-factura", async (req, res) => {
   }
 });
 
+
+app.post("/recibir-archivo", async (req, res) => {
+  try {
+
+    let invoiceID = req.body;
+   
+    try {
+      
+      
+
+      const response = await axios.get(
+        "https://api.facturama.mx/"+req.body,
+        
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          auth: {
+            username: "jpineda",
+            password: "Aurora2022",
+          },
+        }
+      );
+      
+     
+      res.status(200).send({
+        respuestaFacturama: response.data,
+      });
+    } catch (error) {
+      console.error("Error al enviar datos a Facturama:", error.message);
+      ultimoEstado = `Error al enviar datos a Facturama: ${error.message}`;
+      res.status(500).send({
+        error: "Internal Server Error",
+        message: `Error al enviar datos a Facturama: ${error.message}`,
+      });
+    }
+  } catch (error) {
+    console.error("Error al procesar la solicitud:", error.message);
+    ultimoEstado = `Error al procesar la solicitud: ${error.message}`;
+    res.status(400).send({ error: "BadRequest", message: error.message });
+  }
+});
+
+
 // Devolver el estado de la última solicitud
 app.get("/estado-ultima-solicitud", (req, res) => {
   res.send({
