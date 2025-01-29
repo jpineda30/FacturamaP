@@ -21,6 +21,7 @@ app.post("/recibir-factura", async (req, res) => {
 
     var authFact = req.headers["Authorization"]; 
     autho = authFact;
+    console.log(autho);
     let rawFacturaData = req.body;
     rawFacturaData = rawFacturaData.replaceAll('\'', '"');
 
@@ -120,7 +121,7 @@ app.post("/recibir-archivo", async (req, res) => {
 // Devolver el estado de la última solicitud
 app.get("/estado-ultima-solicitud", (req, res) => {
   res.send({
-    key: autho,
+    keyk: autho,
     estado: ultimoEstado,
     datosRecibidos: ultimosDatosRecibidos,
   });
