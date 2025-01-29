@@ -19,8 +19,8 @@ app.post("/recibir-factura", async (req, res) => {
     console.log("Datos recibidos de SAP:", req.body);
 
     let rawFacturaData = req.body;
-    rawFacturaData = rawFacturaData.replace("'",'"');
-    
+    rawFacturaData = rawFacturaData.replace('\'', '\"');
+
     // Verificar que rawFacturaData es una cadena de texto
     if (typeof rawFacturaData !== "string") {
       throw new Error("Formato de entrada no válido");
@@ -31,8 +31,8 @@ app.post("/recibir-factura", async (req, res) => {
 
     // Enviar datos a Facturama sin validar el JSON
     try {
-      rawFacturaData = rawFacturaData.replace("'",'"')
-      var invoice = JSON.parse(rawFacturaData.replace("'",'"'));
+      
+      var invoice = JSON.parse(rawFacturaData);
       ultimosDatosRecibidos = invoice;
 
       const response = await axios.post(
