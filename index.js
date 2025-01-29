@@ -19,7 +19,7 @@ app.post("/recibir-factura", async (req, res) => {
     console.log("Datos recibidos de SAP:", req.body);
 
     let rawFacturaData = req.body;
-    rawFacturaData = rawFacturaData.replace('\'', '\"');
+    rawFacturaData = rawFacturaData.replaceAll('\'', '"');
 
     // Verificar que rawFacturaData es una cadena de texto
     if (typeof rawFacturaData !== "string") {
