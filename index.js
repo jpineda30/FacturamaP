@@ -21,7 +21,7 @@ app.post("/recibir-factura", async (req, res) => {
 
     var authFact = req.headers["Authorization"]; 
     autho = authFact;
-    console.log(autho);
+    console.log(req.headers);
     let rawFacturaData = req.body;
     rawFacturaData = rawFacturaData.replaceAll('\'', '"');
 
