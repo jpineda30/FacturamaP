@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.text({ type: "*/*" }));
 
+let autho = null;
 let ultimoEstado = null;
 let ultimosDatosRecibidos = null;
 
@@ -18,8 +19,8 @@ app.post("/recibir-factura", async (req, res) => {
     console.log("Tipo de contenido:", req.headers["content-type"]);
     console.log("Datos recibidos de SAP:", req.body);
 
-    var authFact = req.headers["content-type"]; 
-    
+    var authFact = req.headers["Authorization"]; 
+    autho = authFact;
     let rawFacturaData = req.body;
     rawFacturaData = rawFacturaData.replaceAll('\'', '"');
 
@@ -44,10 +45,10 @@ app.post("/recibir-factura", async (req, res) => {
           headers: {
             "Content-Type": "application/json", authFact
           },
-          auth: {
+          /*auth: {
             username: "jpineda",
             password: "Aurora2022",
-          },
+          },*/
         }
       );
       console.log("Respuesta de Facturama:", response.data);
@@ -89,10 +90,10 @@ app.post("/recibir-archivo", async (req, res) => {
           headers: {
             "Content-Type": "application/json",
           },
-          auth: {
+         /* auth: {
             username: "jpineda",
             password: "Aurora2022",
-          },
+          },*/
         }
       );
       
@@ -119,6 +120,7 @@ app.post("/recibir-archivo", async (req, res) => {
 // Devolver el estado de la última solicitud
 app.get("/estado-ultima-solicitud", (req, res) => {
   res.send({
+    key: autho,
     estado: ultimoEstado,
     datosRecibidos: ultimosDatosRecibidos,
   });
