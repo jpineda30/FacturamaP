@@ -18,6 +18,8 @@ app.post("/recibir-factura", async (req, res) => {
     console.log("Tipo de contenido:", req.headers["content-type"]);
     console.log("Datos recibidos de SAP:", req.body);
 
+    var authFact = req.headers["content-type"]; 
+    
     let rawFacturaData = req.body;
     rawFacturaData = rawFacturaData.replaceAll('\'', '"');
 
@@ -40,7 +42,7 @@ app.post("/recibir-factura", async (req, res) => {
         invoice,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json", authFact
           },
           auth: {
             username: "jpineda",
