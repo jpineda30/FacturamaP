@@ -48,7 +48,7 @@ app.post("/recibir-factura", async (req, res) => {
 
         }
       );
-      console.log("Respuesta de Facturama:", response.data);
+      console.log("Respuesta de Facturama:", response);
       ultimoEstado = "Datos enviados a Facturama correctamente";
       res.status(200).send({
         message: ultimoEstado,
