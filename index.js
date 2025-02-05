@@ -57,7 +57,7 @@ app.post("/recibir-factura", async (req, res) => {
       });
     } catch (error) {
       console.error("Error al enviar datos a Facturama:", error.message);
-      ultimoEstado = `Error al enviar datos a Facturama: ${error.message}`;
+      ultimoEstado = `Error al enviar datos a Facturama: ${error}`;
       res.status(500).send({
         error: "Internal Server Error",
         message: `Error al enviar datos a Facturama: ${error.message}`,
